@@ -1,32 +1,56 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:,">
-    <link rel="stylesheet" href="styles.css">
-    <title>library</title>
-</head>
-<body>
-<table >
-    <thead>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My library</title>
+  </head>
+  <body>
+    <header>
+      <h1>My Library App</h1>
+    </header>
+
+    <dialog id="my-dialog">
+      <p>
+     <form id="book-form" >
+      <input type="text" id="book-name" placeholder="Book Name" />
+      <input type="text" id="book-title" placeholder="Title" />
+      <input type="text"  id="author" placeholder="Author" />
+      <input type="text"  id="pages" placeholder="Pages" />
+      
+      <select id="mySelection">
+        <option value="read">Read</option>
+        <option value="notRead" selected>Not Read</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form></p>
+      <button commandfor="my-dialog" command="close">Close</button>
+    </dialog>
+
+    <div id="container" >
+      <button type="button" id="openBtn">New Book</button>
+
+    </div>
+
+    <table>
+      <thead>
         <tr>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Id</th>
-            
+          <th>Name</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Status</th>
+          <th>ID</th>
         </tr>
-    </thead>
-    
-    <!-- Rows will be populated by JavaScript -->
-    <tbody id="displayBooks">
-    </tbody>
-</table>
+      </thead>
 
+      <!-- Rows will be populated by JavaScript -->
+      <tbody id="display-book"></tbody>
+    </table>
 
-    <script   src="script.js" ></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

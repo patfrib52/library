@@ -1,25 +1,66 @@
-
+html,
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;  
-
+  block-size: 100%;
+  margin: 1px;
 }
 
-table { 
-    display: table;
-} 
+body {
+  background-image: linear-gradient(to right, green, blue);
+
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  padding-left: 20px;
+  color: #1b1f2a;
+  font-weight: bold;
+}
+
+div,
+#container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+div,
+#container {
+  padding-right: 30px;
+  padding-bottom: 20px;
+}
+
+#openBtn {
+  width: 150px;
+  height: 25px;
+  color: #1b1f2a;
+  background-color: #709c1e;
+  border-radius: 5px;
+  font-family: "Arial";
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+table {
+  display: table;
+}
 table {
   border-collapse: collapse; /* Merges cell borders into a single line */
   width: 100%;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd; /* Adds the horizontal separator line */
   padding: 8px;
   text-align: left;
 }
 
+th {
+  font-size: 20px;
+}
 
-
+#display-book,
+td {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  font-weight: bold;
+}
