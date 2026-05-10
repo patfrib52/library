@@ -36,32 +36,28 @@ form.addEventListener("submit", function (event) {
   const bookTitle = bookTitleInput.value;
   const author = authorInput.value;
   const pages = bookPagesInput.value;
-  const book = new Book(bookName, bookTitle, author, pages, "", "");
-  // To prevent saving empty data.
+  const status = mySelection.value === "read" ? "Read" : "Not Read";
+  const book = new Book(
+    bookName,
+    bookTitle,
+    author,
+    pages,
+    status,
+    crypto.randomUUID(),
+  );
+
+  // To prevent saving empty data input.
   if (!bookName || !bookTitle || !author || !pages) return;
 
   myLibrary.push(book);
-  displayBook();
-
-  console.log(book);
+  displayBooks();
   dialog.close();
 });
 
-function displayBook() {
+function displayBooks() {
   // clear old books first to prevent duplicate rows.
   display.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
-    // make sure every book get an id.
-    if (!myLibrary[i].id) {
-      myLibrary[i].id += crypto.randomUUID();
-    }
-
-    if (mySelection.value === "read") {
-      myLibrary[i].status += "READ";
-    } else if (mySelection.value === "notRead") {
-      myLibrary[i].status += "Not Read";
-    }
-
     display.innerHTML += `<tr>
     <td>${myLibrary[i].name}</td>
     <td>${myLibrary[i].title}</td>
