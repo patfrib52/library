@@ -8,7 +8,7 @@ const authorInput = document.getElementById("author");
 const bookPagesInput = document.getElementById("pages");
 const mySelection = document.getElementById("mySelection");
 
-const myLibrary = [];
+let myLibrary = [];
 
 class Book {
   constructor(name, title, author, pages, status, id) {
@@ -23,11 +23,11 @@ class Book {
 
 openBtn.addEventListener("click", () => {
   dialog.showModal();
-  // clear the input field before showing to the user.
-  document.getElementById("book-name").value = "";
-  document.getElementById("book-title").value = "";
-  document.getElementById("author").value = "";
-  document.getElementById("pages").value = "";
+
+  bookNameInput.value = "";
+  bookTitleInput.value = "";
+  authorInput.value = "";
+  bookPagesInput.value = "";
 });
 
 form.addEventListener("submit", function (event) {
@@ -37,6 +37,7 @@ form.addEventListener("submit", function (event) {
   const author = authorInput.value;
   const pages = bookPagesInput.value;
   const status = mySelection.value === "read" ? "Read" : "Not Read";
+  // To prevent saving empty data input.
   const book = new Book(
     bookName,
     bookTitle,
@@ -45,10 +46,7 @@ form.addEventListener("submit", function (event) {
     status,
     crypto.randomUUID(),
   );
-
-  // To prevent saving empty data input.
   if (!bookName || !bookTitle || !author || !pages) return;
-
   myLibrary.push(book);
   displayBooks();
   dialog.close();
@@ -58,14 +56,42 @@ function displayBooks() {
   // clear old books first to prevent duplicate rows.
   display.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
-    display.innerHTML += `<tr>
-    <td>${myLibrary[i].name}</td>
-    <td>${myLibrary[i].title}</td>
-    <td>${myLibrary[i].author}</td>
-    <td>${myLibrary[i].pages}</td>
-    <td>${myLibrary[i].status}</td>
-    <td>${myLibrary[i].id}</td>
-    
-    </tr>`;
+    const row = document.createElement("tr");
+
+    const nameTd = document.createElement("td");
+    nameTd.textContent = myLibrary[i].name;
+    const titleTd = document.createElement("td");
+    titleTd.textContent = myLibrary[i].title;
+    const authorTd = document.createElement("td");
+    authorTd.textContent = myLibrary[i].author;
+    const pagesTd = document.createElement("td");
+    pagesTd.textContent = myLibrary[i].pages;
+    const statusTd = document.createElement("td");
+    statusTd.textContent = myLibrary[i].status;
+
+    const deleteTd = document.createElement("td");
+    const deleteBtn = document.createElement("button");
+
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.dataset.id = myLibrary[i].id;
+
+    deleteTd.appendChild(deleteBtn);
+
+    row.appendChild(nameTd);
+    row.appendChild(titleTd);
+    row.appendChild(authorTd);
+    row.appendChild(pagesTd);
+    row.appendChild(statusTd);
+    row.appendChild(deleteTd);
+    display.appendChild(row);
   }
 }
+
+display.addEventListener("click", (e) => {
+  if (!e.target.dataset.id) return;
+  const bookId = e.target.dataset.id;
+
+  myLibrary = myLibrary.filter((book) => book.id !== bookId);
+  displayBooks();
+});
